@@ -10,12 +10,12 @@ public class VerifyPassword {
 	/*
 	 * After you update the passwords in customers table,
 	 *   you can use this program as an example to verify the password.
-	 *   
+	 *
 	 * Verify the password is simple:
 	 * success = new StrongPasswordEncryptor().checkPassword(password, encryptedPassword);
-	 * 
+	 *
 	 * Note that you need to use the same StrongPasswordEncryptor when encrypting the passwords
-	 * 
+	 *
 	 */
 	public static void main(String[] args) throws Exception {
 
@@ -25,7 +25,7 @@ public class VerifyPassword {
 	}
 
 	private static boolean verifyCredentials(String email, String password) throws Exception {
-		
+
 		String loginUser = "mytestuser";
 		String loginPasswd = "My6$Password";
 		String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
@@ -40,9 +40,9 @@ public class VerifyPassword {
 
 		boolean success = false;
 		if (rs.next()) {
-		    // get the encrypted password from the database
+			// get the encrypted password from the database
 			String encryptedPassword = rs.getString("password");
-			
+
 			// use the same encryptor to compare the user input password with encrypted password stored in DB
 			success = new StrongPasswordEncryptor().checkPassword(password, encryptedPassword);
 		}
@@ -50,7 +50,7 @@ public class VerifyPassword {
 		rs.close();
 		statement.close();
 		connection.close();
-		
+
 		System.out.println("verify " + email + " - " + password);
 
 		return success;
